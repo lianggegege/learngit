@@ -1,0 +1,74 @@
+创建版本库
+git init 添加仓库
+git add 添加文件到暂存区
+git commit -m "" 提交到分支加注释
+git status 查看文件修改状态
+git diff 查看文件修改内容
+git log 修改日志
+git log --pretty=oneline 简洁版修改日志
+git reflog 查看历史日志
+git reset --hard Head^回退一个版本
+git reset --hard Id   根据版本号恢复文件
+git checkout -- file  回到修改前一个状态（没有添加到暂存区）
+git reset HEAD file   可以把暂存区的修改撤销掉（unstage），重新放回工作区
+git rm file 删除文件
+
+$ ssh-keygen -t rsa -C "youremail@example.com" 没有ssh创建ssh key
+git remote add origin git@server-name:path/repo-name.git 关联远程库
+git push -u origin master 第一次推送master分支的所有内容
+git push origin master    推送最新修改
+
+关于分支：
+git branch 查看分支
+git branch (name) 创建分支
+git checkout (name) 切换分支
+git checkout -b (name) 创建并切换分支
+git merge (name) 合并某分支到当前分支
+git branch -d (name) 删除某分支
+git branch -D （name） 强行删除分支（针对没有merge 的分支）
+
+分支管理策略：
+git merge --no-ff -m "" (name) 合并分支时禁用fast forward 历史记录有合并记录否则没有
+
+冲突解决：
+当Git无法自动合并分支时，就必须首先解决冲突。解决冲突后，再提交，合并完成。
+用git log --graph命令可以看到分支合并图。
+
+bug分支
+修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；
+git stash 可以把当前工作现场“储藏”起来
+
+多人协作：
+查看远程库信息，使用git remote -v；
+本地新建的分支如果不推送到远程，对其他人就是不可见的；
+从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
+在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
+从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+
+创建标签
+命令git tag <name>用于新建一个标签，默认为HEAD，也可以指定一个commit id；
+git tag -a <tagname> -m "blablabla..."可以指定标签信息；
+git tag -s <tagname> -m "blablabla..."可以用PGP签名标签；
+命令git tag可以查看所有标签。
+命令git push origin <tagname>可以推送一个本地标签；
+命令git push origin --tags可以推送全部未推送过的本地标签；
+命令git tag -d <tagname>可以删除一个本地标签；
+命令git push origin :refs/tags/<tagname>可以删除一个远程标签。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+git stash list 查看储藏列表
+
+当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。
